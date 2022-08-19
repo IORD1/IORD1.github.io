@@ -16,6 +16,7 @@ body{
   text-align: center;
   height: 100vh;
   width: 100%;
+  transition: all 1s ease-in-out;
 }
 
 
@@ -89,12 +90,12 @@ body{
 
 .main-box{
   background-color: white;
-  height: auto  ;
+  height: auto ;
   width: 550px;
   border-radius: 4px;
   padding: 50px ;
   padding-top: 40px;
-  transition: opacity 1s;
+  transition: all 1s ease-in-out;
 }
 
 
@@ -107,7 +108,7 @@ body{
   font-family: 'M PLUS Rounded 1c', sans-serif;
   font-family: 'Raleway', sans-serif; 
   font-size: 28px;
-  color: #FA6864;
+  /* color: #FA6864; */
   line-height: 30px;
   font-weight: 500;
   transition: 500ms;
@@ -123,7 +124,7 @@ body{
 }
 
 #text{
-  transition: opacity 1s;
+  transition: all 1s ease-in-out;
 }
 
 
@@ -132,7 +133,7 @@ body{
   width: 450px;
   display: flex;
   text-align:right;
-  color: #FA6864;
+  /* color: #FA6864; */
   justify-content: right;
   align-items: right;
   font-family: 'M PLUS Rounded 1c', sans-serif;
@@ -150,7 +151,8 @@ body{
   transition: 500ms;
 }
 
-
+#author{
+  transition: all 1s ease-in-out;}
 
 
 .quote-share-container{
@@ -163,7 +165,7 @@ body{
 .footer-button{
   height: 40px;
   width: 40px;
-  background-color: #FA6864;
+  /* background-color: #FA6864; */
   color: white;
   margin-right: 5px;
   border-radius: 4px;
@@ -180,7 +182,7 @@ body{
 }
 
 .footer-button:hover{
-  background-color: #fa7672;
+  /* background-color: #fa7672; */
   color: white
 }
 
@@ -202,8 +204,7 @@ body{
 
 .by-box{
   color: white;
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Silkscreen', cursive;
   font-weight: 500;
   font-size: 12.8px;
   display: flex;
@@ -218,23 +219,11 @@ body{
 
 .by-box:a{
   text-decoration: none;
+
+  font-family: 'Silkscreen', cursive;
 }
 
 
 /* 
 expermient */
 
-
-
-.anim-typewriter{
-  animation: typewriter 4s steps(44) 1s 1 normal both,
-             blinkTextCursor 500ms steps(44) infinite normal;
-}
-@keyframes typewriter{
-  from{width: 0;}
-  to{width: 24em;}
-}
-@keyframes blinkTextCursor{
-  from{border-right-color: rgba(255,255,255,.75);}
-  to{border-right-color: transparent;}
-}
