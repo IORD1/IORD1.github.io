@@ -83,6 +83,14 @@ body{
 
 }
 
+<<<<<<< HEAD
+=======
+.quote-boxes{
+  height: auto;
+  width:40% ;
+  border-radius: 4px;
+}
+>>>>>>> 5aa7724aa108054624f7e9a7eb7c39a4fb27dc4d
 
 .main-box{
   background-color: white;
