@@ -29,6 +29,15 @@ body{
   overflow: hidden;
 }
 
+.quote-box{
+  max-width: 550px;
+}
+
+@media screen and (max-width: 540px) {
+  .view {
+      width: 90%;
+  }
+}
 
 /* header */
 .welcomeheader{
@@ -60,14 +69,6 @@ body{
   margin: auto 5px 5px auto;
 }
 
-.logoheader2{
-  margin-left: 10px;
-}
-
-@keyframes App-logo-spin {
-  from {transform: rotate(1800deg); }
-  to {  transform: rotate(0deg); }
-}
 
 
 /* botton base */
@@ -82,16 +83,11 @@ body{
 
 }
 
-.quote-boxes{
-  height: auto;
-  width: 550px;
-  border-radius: 4px;
-}
 
 .main-box{
   background-color: white;
   height: auto ;
-  width: 550px;
+  width: 100%;
   border-radius: 4px;
   padding: 50px ;
   padding-top: 40px;
@@ -100,7 +96,7 @@ body{
 
 
 .quote-box1{
-  width: 450px;
+
   height: auto;
   display: flex;
   padding-left: 30px;
