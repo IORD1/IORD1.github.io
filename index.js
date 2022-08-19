@@ -4,9 +4,11 @@ window.onload = function() {
 
 
 function func(){
-    // $.getJSON("https://api.quotable.io/random", function(data) { 
-    //   alert(data);
-    // });
+
+    var theme = '#' + Math.floor(Math.random() * 16777215).toString(16);
+    document.getElementById("App").style.backgroundColor = theme;
+    document.getElementById("")
+
     
     fetch('https://api.quotable.io/random')
       .then(function (response) {
