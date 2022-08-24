@@ -33,14 +33,7 @@ body{
   max-width: 550px;
 }
 
-@media screen and (max-width: 540px) {
-  .quote-box{
-      width: 90%; 
-  }
-  #idea{
-    font-size: 5px;
-  }
-}
+
 
 /* header */
 .welcomeheader{
@@ -169,7 +162,6 @@ body{
 .footer-button{
   height: 40px;
   width: 40px;
-  /* background-color: #FA6864; */
   color: white;
   border-radius: 4px;
   display: flex;
@@ -177,18 +169,18 @@ body{
   align-items: center;
   font-size: larger;
   transition: 500ms;
-
 }
 
 #tumblr-button{
-  margin-right: 5px;
+  margin-right: auto;
 }
+
 
 #tweet-quote{
   margin-right: 5px;
 }
 .footer-button:hover{
-  /* background-color: #fa7672; */
+  opacity: 0.9;
   color: white
 }
 
@@ -196,38 +188,46 @@ body{
 #new-quote{
   border: none;
   width: 101px;
-
   color:  white;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 13.6px;
+  display: flex;
   font-weight: 400;
-  margin: auto 1px auto auto;
+  margin: auto 1px auto 5px;
+
 }
 
 #foot-button:focus{
     border: none;
 }
 
-.by-box{
-  color: white;
-  font-family: 'Silkscreen', cursive;
-  font-weight: 500;
-  font-size: 12.8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .by-footer{
   font-weight: 300;
   margin-right: 3px;
 }
 
-.by-box:a{
-  text-decoration: none;
 
+
+/* by box */
+
+
+#by-box{
+  width: 100%;
+  height: 10%;
+  color: white;
   font-family: 'Silkscreen', cursive;
+  font-size: 12px;
+  font-weight: 300;
+  text-align: center;
 }
+
+#by-box a{
+  color: aqua;
+  text-decoration: none;
+  font-size: 14px;
+}
+
 
 
 /* 
@@ -275,4 +275,27 @@ expermient splash screen*/
 .fade-in{
   opacity : 0;
   animation: fadeIn 1s ease-in forwards;
+}
+
+
+/* for phones */
+
+@media screen and (max-width: 540px) {
+  .quote-box{
+      width: 90%; 
+  }
+  #idea{
+    font-size: 5px;
+  }
+
+  .main-box{
+    padding: 10px ;
+    padding-top: 40px;
+
+  }
+
+  .quote-box1{
+  padding-left: 3px;
+  padding-right: 3px;
+  }
 }
