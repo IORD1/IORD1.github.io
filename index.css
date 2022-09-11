@@ -9,7 +9,12 @@ body{
   align-items: center;
 
 }
+/* main box */
+.main{
+  background-color: #222;
+}
 
+/* quote commented */
 
 #App {
   /* background-color: #FA6864; */
