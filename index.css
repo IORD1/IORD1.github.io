@@ -14,14 +14,21 @@ body{
   background-color: #222;
 }
 
+#banner{
+  width: 100vw;
+  height: auto;
+  overflow: hidden;
+}
+
 /* quote commented */
 
 #App {
   /* background-color: #FA6864; */
   text-align: center;
-  height: 100vh;
-  width: 100%;
+  height: 40vh;
+  width: 100vw;
   transition: all 1s ease-in-out;
+  overflow: hidden;
 }
 
 
