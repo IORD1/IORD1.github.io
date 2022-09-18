@@ -1,0 +1,581 @@
+<pre>N/A: version &quot;N/A -&gt; N/A&quot; is not yet installed.
+
+    You need to run &quot;nvm install N/A&quot; to install it before using it.
+    <font color="#4E9A06"><b>pratham@trident</b></font>:<font color="#3465A4"><b>~</b></font>$ sudo mysql
+    [sudo] password for pratham: 
+    Welcome to the MySQL monitor.  Commands end with ; or \g.
+    Your MySQL connection id is 8
+    Server version: 8.0.29-0ubuntu0.20.04.3 (Ubuntu)
+    
+    Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+    
+    Oracle is a registered trademark of Oracle Corporation and/or its
+    affiliates. Other names may be trademarks of their respective
+    owners.
+    
+    Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.
+    
+    mysql&gt; use HMS
+    Reading table information for completion of table and column names
+    You can turn off this feature to get a quicker startup with -A
+    
+    Database changed
+    mysql&gt; show tables;
+    +---------------+
+    | Tables_in_HMS |
+    +---------------+
+    | ambulance     |
+    | bill          |
+    | doctors       |
+    | labs          |
+    | opd           |
+    | patient       |
+    | services      |
+    | wards         |
+    +---------------+
+    8 rows in set (0.01 sec)
+    
+    mysql&gt; desc ambulance;
+    +------------+-------------+------+-----+---------+-------+
+    | Field      | Type        | Null | Key | Default | Extra |
+    +------------+-------------+------+-----+---------+-------+
+    | amb_no     | int         | NO   | PRI | NULL    |       |
+    | vehicle_no | varchar(10) | NO   |     | NULL    |       |
+    | driver_id  | int         | NO   |     | NULL    |       |
+    | category   | varchar(15) | YES  |     | NULL    |       |
+    | status     | varchar(10) | NO   |     | NULL    |       |
+    +------------+-------------+------+-----+---------+-------+
+    5 rows in set (0.01 sec)
+    
+    mysql&gt; select * from ambulance;
+    +--------+------------+-----------+------------+-----------+
+    | amb_no | vehicle_no | driver_id | category   | status    |
+    +--------+------------+-----------+------------+-----------+
+    |      1 | MH17AC1460 |      1023 | collective | busy      |
+    |      2 | MH17BC1960 |      8906 | mobile ICU | available |
+    |      3 | MH17AA1470 |      9804 | MVA        | available |
+    |      4 | MH17BA1953 |      2865 | neonatal   | busy      |
+    |      5 | MH17AL9758 |      2547 | individual | available |
+    +--------+------------+-----------+------------+-----------+
+    5 rows in set (0.00 sec)
+    
+    mysql&gt; drop table ambulance;
+    ERROR 3730 (HY000): Cannot drop table &apos;ambulance&apos; referenced by a foreign key constraint &apos;services_ibfk_3&apos; on table &apos;services&apos;.
+    mysql&gt; alter table ambulance modify driver_id int NULL;
+    Query OK, 0 rows affected (8.28 sec)
+    Records: 0  Duplicates: 0  Warnings: 0
+    
+    mysql&gt; desc ambulance;
+    +------------+-------------+------+-----+---------+-------+
+    | Field      | Type        | Null | Key | Default | Extra |
+    +------------+-------------+------+-----+---------+-------+
+    | amb_no     | int         | NO   | PRI | NULL    |       |
+    | vehicle_no | varchar(10) | NO   |     | NULL    |       |
+    | driver_id  | int         | YES  |     | NULL    |       |
+    | category   | varchar(15) | YES  |     | NULL    |       |
+    | status     | varchar(10) | NO   |     | NULL    |       |
+    +------------+-------------+------+-----+---------+-------+
+    5 rows in set (0.22 sec)
+    
+    mysql&gt; alter table ambulance modify driver_id int NOT NULL:
+        -&gt; ;
+    ;
+    ^C
+    mysql&gt; alter table ambulance modify driver_id int NOT NULL;
+    Query OK, 0 rows affected (4.01 sec)
+    Records: 0  Duplicates: 0  Warnings: 0
+    
+    mysql&gt; alter table ambulance modify vehicle_no vehicle_number varchar(10);
+    ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &apos;vehicle_number varchar(10)&apos; at line 1
+    mysql&gt; alter table ambulance rename vehicle_no vehicle_number varchar(10);
+    ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &apos;vehicle_number varchar(10)&apos; at line 1
+    mysql&gt; alter table ambulance rename column vehicle_no to vehicle_number;
+    Query OK, 0 rows affected (0.42 sec)
+    Records: 0  Duplicates: 0  Warnings: 0
+    
+    mysql&gt; desc ambulance;
+    +----------------+-------------+------+-----+---------+-------+
+    | Field          | Type        | Null | Key | Default | Extra |
+    +----------------+-------------+------+-----+---------+-------+
+    | amb_no         | int         | NO   | PRI | NULL    |       |
+    | vehicle_number | varchar(10) | NO   |     | NULL    |       |
+    | driver_id      | int         | NO   |     | NULL    |       |
+    | category       | varchar(15) | YES  |     | NULL    |       |
+    | status         | varchar(10) | NO   |     | NULL    |       |
+    +----------------+-------------+------+-----+---------+-------+
+    5 rows in set (0.01 sec)
+    
+    mysql&gt; alter table ambulance drop column driver_id;
+    Query OK, 0 rows affected (0.33 sec)
+    Records: 0  Duplicates: 0  Warnings: 0
+    
+    mysql&gt; desc ambulance;
+    +----------------+-------------+------+-----+---------+-------+
+    | Field          | Type        | Null | Key | Default | Extra |
+    +----------------+-------------+------+-----+---------+-------+
+    | amb_no         | int         | NO   | PRI | NULL    |       |
+    | vehicle_number | varchar(10) | NO   |     | NULL    |       |
+    | category       | varchar(15) | YES  |     | NULL    |       |
+    | status         | varchar(10) | NO   |     | NULL    |       |
+    +----------------+-------------+------+-----+---------+-------+
+    4 rows in set (0.01 sec)
+    
+    mysql&gt; select * from ambulance;
+    +--------+----------------+------------+-----------+
+    | amb_no | vehicle_number | category   | status    |
+    +--------+----------------+------------+-----------+
+    |      1 | MH17AC1460     | collective | busy      |
+    |      2 | MH17BC1960     | mobile ICU | available |
+    |      3 | MH17AA1470     | MVA        | available |
+    |      4 | MH17BA1953     | neonatal   | busy      |
+    |      5 | MH17AL9758     | individual | available |
+    +--------+----------------+------------+-----------+
+    5 rows in set (0.06 sec)
+    
+    mysql&gt; select * from bill;
+    +------------+------+--------+-------------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    | invoice_no | p_id | doc_id | patient_type      | doctor_charges | medicinal_charges | nursing_charges | amount | no_of_days | bill_date  | lab_charges | admission_date |
+    +------------+------+--------+-------------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    |      15686 | 2001 |   8092 | fever             |            200 |               350 |             450 |      0 |          2 | 2022-06-19 |        1000 | 2022-06-19     |
+    |      15687 | 2002 |   8092 | apendix           |            450 |               660 |             450 |      0 |          3 | 2022-04-02 |        2520 | 2022-04-05     |
+    |      15688 | 2003 |   8082 | tooth-ache        |            330 |               550 |             450 |      0 |          0 | 2022-06-19 |           0 | 2022-06-19     |
+    |      15689 | 2004 |   8084 | rashesh           |            660 |               350 |             450 |      0 |          1 | 2022-06-24 |        1000 | 2022-06-25     |
+    |      15690 | 2005 |   8087 | dengu             |            482 |               450 |             450 |      0 |         12 | 2022-05-27 |        2060 | 2022-05-27     |
+    |      15691 | 2006 |   8084 | cataract          |           1200 |              1600 |             450 |      0 |          6 | 2022-04-25 |        1600 | 2022-05-01     |
+    |      15692 | 2007 |   8093 | typhoid           |            450 |               480 |             450 |      0 |         10 | 2022-07-27 |        1900 | 2022-08-07     |
+    |      15693 | 2008 |   8084 | kindney-failure   |            690 |              6000 |             450 |      0 |         15 | 2022-02-13 |        2690 | 2022-02-28     |
+    |      15694 | 2009 |   8081 | heart-blockages   |           1200 |              8000 |             450 |      0 |         12 | 2022-05-05 |        3000 | 2022-05-17     |
+    |      15695 | 2010 |   8082 | leg-fracture      |            300 |              1200 |             450 |      0 |          2 | 2022-11-07 |        1800 | 2022-11-09     |
+    |      15696 | 2011 |   8085 | mouth-cancer      |           1270 |              9000 |             450 |      0 |         21 | 2022-06-16 |        3960 | 2022-07-07     |
+    |      15697 | 2012 |   8082 | accident          |            680 |              1500 |             450 |      0 |         30 | 2022-05-23 |        2300 | 2022-06-23     |
+    |      15698 | 2013 |   8090 | pregnancy         |           1000 |              4500 |             450 |      0 |          1 | 2022-05-28 |        1800 | 2022-05-28     |
+    |      15699 | 2014 |   8081 | brain-hamorreaoge |           2400 |              7800 |             450 |      0 |          4 | 2022-04-08 |        4090 | 2022-04-12     |
+    |      15700 | 2015 |   8086 | fever             |            200 |               250 |             450 |      0 |          0 | 2022-12-22 |         350 | 2022-12-22     |
+    |      15701 | 2020 |   8086 | fever             |            200 |               250 |             450 |      0 |          0 | 2022-09-18 |         350 | 2022-09-18     |
+    +------------+------+--------+-------------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    16 rows in set (0.10 sec)
+    
+    mysql&gt; select * from ambulance where status = &apos;busy&apos;;
+    +--------+----------------+------------+--------+
+    | amb_no | vehicle_number | category   | status |
+    +--------+----------------+------------+--------+
+    |      1 | MH17AC1460     | collective | busy   |
+    |      4 | MH17BA1953     | neonatal   | busy   |
+    +--------+----------------+------------+--------+
+    2 rows in set (0.26 sec)
+    
+    mysql&gt; select * from doctors;
+    +--------+---------------------+----------------+---------------+------------+-----------------+
+    | doc_id | name                | department     | qualification | experience | data_of_joining |
+    +--------+---------------------+----------------+---------------+------------+-----------------+
+    |   8080 | Sandeep Vaishya     | Neurosurgeon   | MS            | 20 years   | 2000-08-12      |
+    |   8081 | Ramesh Kothari      | Cardiologist   | MD            | 19 years   | 2001-09-21      |
+    |   8082 | Rakesh Patil        | Surgeon        | MS            | 15 years   | 2005-03-22      |
+    |   8083 | Ankush Shinde       | Urologist      | MS            | 18 years   | 2002-08-12      |
+    |   8084 | Ashish Gandhi       | Dentist        | BDS           | 25 years   | 1995-09-11      |
+    |   8085 | Surabhi Nair        | Ophthamologist | MBBS          | 19 years   | 2001-06-22      |
+    |   8086 | Gagan Gautam        | Pediatrisian   | MD            | 13 years   | 2007-03-01      |
+    |   8087 | Abhishek Sinha      | Dermatologist  | MS            | 08 years   | 2012-04-06      |
+    |   8088 | Aditya Gupta        | Opthamologist  | MS            | 16 years   | 2004-11-25      |
+    |   8089 | Bipin Vaidya        | Radiologist    | MS            | 06 years   | 2014-07-31      |
+    |   8090 | Gaurav Khanna       | Gynaecologist  | MS            | 17 years   | 2003-07-07      |
+    |   8091 | Ankur Rathod        | Nephrologist   | MS            | 09 years   | 2011-06-17      |
+    |   8092 | Dhanashri Jain      | Patheologist   | MD            | 13 years   | 2007-12-27      |
+    |   8093 | Indraprakash Mishra | Microbiologist | MD            | 04 years   | 2016-05-07      |
+    |   8094 | Mahesh Kundra       | Hematologist   | MS            | 15 years   | 2005-07-21      |
+    |   8095 | Alakh Pandey        | Oncologist     | MS            | 18 years   | 2002-06-19      |
+    +--------+---------------------+----------------+---------------+------------+-----------------+
+    16 rows in set (0.04 sec)
+    
+    mysql&gt; select * from doctors where experience &gt; 10 group by qualification = &apos;MS&apos;;
+    ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column &apos;HMS.doctors.doc_id&apos; which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+    mysql&gt; select * from doctors where experience &gt; 10 groupby qualification = &apos;MS&apos;;
+    ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &apos;groupby qualification = &apos;MS&apos;&apos; at line 1
+    mysql&gt; select * from doctors where date_of_joining &gt; &apos;2006-01-01&apos; groupby qualification = &apos;MS&apos;;
+    ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &apos;groupby qualification = &apos;MS&apos;&apos; at line 1
+    mysql&gt; select * from doctors where date_of_joining &gt; &apos;2006-01-01&apos; group by qualification = &apos;MS&apos;;
+    ERROR 1054 (42S22): Unknown column &apos;date_of_joining&apos; in &apos;where clause&apos;
+    mysql&gt; select * from doctors where date_of_joining &gt; 2006-01-01 group by qualification = &apos;MS&apos;;
+    ERROR 1054 (42S22): Unknown column &apos;date_of_joining&apos; in &apos;where clause&apos;
+    mysql&gt; select * from doctors where doc_id &gt; 8085 group by qualification = &apos;MS&apos;;
+    ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column &apos;HMS.doctors.doc_id&apos; which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+    mysql&gt; select name, department from doctors group by qualification=&apos;MS&apos;;
+    ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column &apos;HMS.doctors.name&apos; which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+    mysql&gt; select name, department from doctors group by qualification;
+    ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column &apos;HMS.doctors.name&apos; which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+    mysql&gt; select name, qualification from doctors group by qualification=&apos;MS&apos;;
+    ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column &apos;HMS.doctors.name&apos; which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+    mysql&gt; select doc_id name, department from doctors where doc_id &gt; 8085 group by qualification;
+    ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column &apos;HMS.doctors.doc_id&apos; which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+    mysql&gt; select doc_id name from doctors where doc_id &gt; 8085 group by qualification;
+    ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column &apos;HMS.doctors.doc_id&apos; which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+    mysql&gt; select qualification from doctors group by qualification;
+    +---------------+
+    | qualification |
+    +---------------+
+    | MS            |
+    | MD            |
+    | BDS           |
+    | MBBS          |
+    +---------------+
+    4 rows in set (0.10 sec)
+    
+    mysql&gt; select * from bill;
+    +------------+------+--------+-------------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    | invoice_no | p_id | doc_id | patient_type      | doctor_charges | medicinal_charges | nursing_charges | amount | no_of_days | bill_date  | lab_charges | admission_date |
+    +------------+------+--------+-------------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    |      15686 | 2001 |   8092 | fever             |            200 |               350 |             450 |      0 |          2 | 2022-06-19 |        1000 | 2022-06-19     |
+    |      15687 | 2002 |   8092 | apendix           |            450 |               660 |             450 |      0 |          3 | 2022-04-02 |        2520 | 2022-04-05     |
+    |      15688 | 2003 |   8082 | tooth-ache        |            330 |               550 |             450 |      0 |          0 | 2022-06-19 |           0 | 2022-06-19     |
+    |      15689 | 2004 |   8084 | rashesh           |            660 |               350 |             450 |      0 |          1 | 2022-06-24 |        1000 | 2022-06-25     |
+    |      15690 | 2005 |   8087 | dengu             |            482 |               450 |             450 |      0 |         12 | 2022-05-27 |        2060 | 2022-05-27     |
+    |      15691 | 2006 |   8084 | cataract          |           1200 |              1600 |             450 |      0 |          6 | 2022-04-25 |        1600 | 2022-05-01     |
+    |      15692 | 2007 |   8093 | typhoid           |            450 |               480 |             450 |      0 |         10 | 2022-07-27 |        1900 | 2022-08-07     |
+    |      15693 | 2008 |   8084 | kindney-failure   |            690 |              6000 |             450 |      0 |         15 | 2022-02-13 |        2690 | 2022-02-28     |
+    |      15694 | 2009 |   8081 | heart-blockages   |           1200 |              8000 |             450 |      0 |         12 | 2022-05-05 |        3000 | 2022-05-17     |
+    |      15695 | 2010 |   8082 | leg-fracture      |            300 |              1200 |             450 |      0 |          2 | 2022-11-07 |        1800 | 2022-11-09     |
+    |      15696 | 2011 |   8085 | mouth-cancer      |           1270 |              9000 |             450 |      0 |         21 | 2022-06-16 |        3960 | 2022-07-07     |
+    |      15697 | 2012 |   8082 | accident          |            680 |              1500 |             450 |      0 |         30 | 2022-05-23 |        2300 | 2022-06-23     |
+    |      15698 | 2013 |   8090 | pregnancy         |           1000 |              4500 |             450 |      0 |          1 | 2022-05-28 |        1800 | 2022-05-28     |
+    |      15699 | 2014 |   8081 | brain-hamorreaoge |           2400 |              7800 |             450 |      0 |          4 | 2022-04-08 |        4090 | 2022-04-12     |
+    |      15700 | 2015 |   8086 | fever             |            200 |               250 |             450 |      0 |          0 | 2022-12-22 |         350 | 2022-12-22     |
+    |      15701 | 2020 |   8086 | fever             |            200 |               250 |             450 |      0 |          0 | 2022-09-18 |         350 | 2022-09-18     |
+    +------------+------+--------+-------------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    16 rows in set (0.00 sec)
+    
+    mysql&gt; select invoice_no, bill_date from bill where bill_date between &apos;2022-04-02&apos; and &apos;2022-08-08&apos;;
+    +------------+------------+
+    | invoice_no | bill_date  |
+    +------------+------------+
+    |      15686 | 2022-06-19 |
+    |      15687 | 2022-04-02 |
+    |      15688 | 2022-06-19 |
+    |      15689 | 2022-06-24 |
+    |      15690 | 2022-05-27 |
+    |      15691 | 2022-04-25 |
+    |      15692 | 2022-07-27 |
+    |      15694 | 2022-05-05 |
+    |      15696 | 2022-06-16 |
+    |      15697 | 2022-05-23 |
+    |      15698 | 2022-05-28 |
+    |      15699 | 2022-04-08 |
+    +------------+------------+
+    12 rows in set (0.01 sec)
+    
+    mysql&gt; select invoice_no, bill_date, doctor_charges from bill where bill_date between &apos;2022-04-02&apos; and &apos;2022-06-08&apos;;
+    +------------+------------+----------------+
+    | invoice_no | bill_date  | doctor_charges |
+    +------------+------------+----------------+
+    |      15687 | 2022-04-02 |            450 |
+    |      15690 | 2022-05-27 |            482 |
+    |      15691 | 2022-04-25 |           1200 |
+    |      15694 | 2022-05-05 |           1200 |
+    |      15697 | 2022-05-23 |            680 |
+    |      15698 | 2022-05-28 |           1000 |
+    |      15699 | 2022-04-08 |           2400 |
+    +------------+------------+----------------+
+    7 rows in set (0.00 sec)
+    
+    mysql&gt; select Min(lab_charges) from billl
+        -&gt; ^C
+    
+    ^C
+    mysql&gt; select Min(lab_charges) from bill;
+    +------------------+
+    | Min(lab_charges) |
+    +------------------+
+    |                0 |
+    +------------------+
+    1 row in set (0.04 sec)
+    
+    mysql&gt; select Min(lab_charges), p_id, name from bill;
+    ERROR 1054 (42S22): Unknown column &apos;name&apos; in &apos;field list&apos;
+    mysql&gt; select Min(lab_charges), p_id, patient_type from bill;
+    ERROR 1140 (42000): In aggregated query without GROUP BY, expression #2 of SELECT list contains nonaggregated column &apos;HMS.bill.p_id&apos;; this is incompatible with sql_mode=only_full_group_by
+    mysql&gt; select Min(lab_charges), p_id from bill;
+    ERROR 1140 (42000): In aggregated query without GROUP BY, expression #2 of SELECT list contains nonaggregated column &apos;HMS.bill.p_id&apos;; this is incompatible with sql_mode=only_full_group_by
+    mysql&gt; select * from bill where min(lab_charges);
+    ERROR 1111 (HY000): Invalid use of group function
+    mysql&gt; select p_id, min(lab_charges) from bill group by lab_charges;
+    ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column &apos;HMS.bill.p_id&apos; which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+    mysql&gt; select p_id, min(lab_charges) from bill group by no_of_days;
+    ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column &apos;HMS.bill.p_id&apos; which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+    mysql&gt; select * from bill where min(lab_charges);
+    ERROR 1111 (HY000): Invalid use of group function
+    mysql&gt; select * from bill where lab_charges = (select min(lab_charges) from bill);
+    +------------+------+--------+--------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    | invoice_no | p_id | doc_id | patient_type | doctor_charges | medicinal_charges | nursing_charges | amount | no_of_days | bill_date  | lab_charges | admission_date |
+    +------------+------+--------+--------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    |      15688 | 2003 |   8082 | tooth-ache   |            330 |               550 |             450 |      0 |          0 | 2022-06-19 |           0 | 2022-06-19     |
+    +------------+------+--------+--------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    1 row in set (0.12 sec)
+    
+    mysql&gt; select * from ward;
+    ERROR 1146 (42S02): Table &apos;HMS.ward&apos; doesn&apos;t exist
+    mysql&gt; select * from wards;
+    +---------+--------+--------+-------+-------------+
+    | ward_no | bed_no | status | floor | building_no |
+    +---------+--------+--------+-------+-------------+
+    | a1      |     10 | full   |     3 | a           |
+    | a2      |     12 | 8empty |     2 | a           |
+    | b1      |     12 | 4empty |     3 | b           |
+    | b2      |     10 | empty  |     2 | b           |
+    | c1      |     10 | 2empty |     3 | c           |
+    | c2      |      8 | 7empty |     2 | c           |
+    +---------+--------+--------+-------+-------------+
+    6 rows in set (0.13 sec)
+    
+    mysql&gt; select count(bed_no) from wards;
+    +---------------+
+    | count(bed_no) |
+    +---------------+
+    |             6 |
+    +---------------+
+    1 row in set (0.09 sec)
+    
+    mysql&gt; select sum(bed_no) from wards where floor=2;
+    +-------------+
+    | sum(bed_no) |
+    +-------------+
+    |          30 |
+    +-------------+
+    1 row in set (0.01 sec)
+    
+    mysql&gt; select * from bill;
+    +------------+------+--------+-------------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    | invoice_no | p_id | doc_id | patient_type      | doctor_charges | medicinal_charges | nursing_charges | amount | no_of_days | bill_date  | lab_charges | admission_date |
+    +------------+------+--------+-------------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    |      15686 | 2001 |   8092 | fever             |            200 |               350 |             450 |      0 |          2 | 2022-06-19 |        1000 | 2022-06-19     |
+    |      15687 | 2002 |   8092 | apendix           |            450 |               660 |             450 |      0 |          3 | 2022-04-02 |        2520 | 2022-04-05     |
+    |      15688 | 2003 |   8082 | tooth-ache        |            330 |               550 |             450 |      0 |          0 | 2022-06-19 |           0 | 2022-06-19     |
+    |      15689 | 2004 |   8084 | rashesh           |            660 |               350 |             450 |      0 |          1 | 2022-06-24 |        1000 | 2022-06-25     |
+    |      15690 | 2005 |   8087 | dengu             |            482 |               450 |             450 |      0 |         12 | 2022-05-27 |        2060 | 2022-05-27     |
+    |      15691 | 2006 |   8084 | cataract          |           1200 |              1600 |             450 |      0 |          6 | 2022-04-25 |        1600 | 2022-05-01     |
+    |      15692 | 2007 |   8093 | typhoid           |            450 |               480 |             450 |      0 |         10 | 2022-07-27 |        1900 | 2022-08-07     |
+    |      15693 | 2008 |   8084 | kindney-failure   |            690 |              6000 |             450 |      0 |         15 | 2022-02-13 |        2690 | 2022-02-28     |
+    |      15694 | 2009 |   8081 | heart-blockages   |           1200 |              8000 |             450 |      0 |         12 | 2022-05-05 |        3000 | 2022-05-17     |
+    |      15695 | 2010 |   8082 | leg-fracture      |            300 |              1200 |             450 |      0 |          2 | 2022-11-07 |        1800 | 2022-11-09     |
+    |      15696 | 2011 |   8085 | mouth-cancer      |           1270 |              9000 |             450 |      0 |         21 | 2022-06-16 |        3960 | 2022-07-07     |
+    |      15697 | 2012 |   8082 | accident          |            680 |              1500 |             450 |      0 |         30 | 2022-05-23 |        2300 | 2022-06-23     |
+    |      15698 | 2013 |   8090 | pregnancy         |           1000 |              4500 |             450 |      0 |          1 | 2022-05-28 |        1800 | 2022-05-28     |
+    |      15699 | 2014 |   8081 | brain-hamorreaoge |           2400 |              7800 |             450 |      0 |          4 | 2022-04-08 |        4090 | 2022-04-12     |
+    |      15700 | 2015 |   8086 | fever             |            200 |               250 |             450 |      0 |          0 | 2022-12-22 |         350 | 2022-12-22     |
+    |      15701 | 2020 |   8086 | fever             |            200 |               250 |             450 |      0 |          0 | 2022-09-18 |         350 | 2022-09-18     |
+    +------------+------+--------+-------------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    16 rows in set (0.00 sec)
+    
+    mysql&gt; select count(p_id), patient_type from bill group by patient_type having count(p_id)&gt;1;
+    +-------------+--------------+
+    | count(p_id) | patient_type |
+    +-------------+--------------+
+    |           3 | fever        |
+    +-------------+--------------+
+    1 row in set (0.06 sec)
+    
+    mysql&gt; create view v1 as select invoice_no, p_id, patient_type from bill where medicinal_charges &gt; 500;
+    Query OK, 0 rows affected (0.27 sec)
+    
+    mysql&gt; select * from v1;
+    +------------+------+-------------------+
+    | invoice_no | p_id | patient_type      |
+    +------------+------+-------------------+
+    |      15687 | 2002 | apendix           |
+    |      15688 | 2003 | tooth-ache        |
+    |      15691 | 2006 | cataract          |
+    |      15693 | 2008 | kindney-failure   |
+    |      15694 | 2009 | heart-blockages   |
+    |      15695 | 2010 | leg-fracture      |
+    |      15696 | 2011 | mouth-cancer      |
+    |      15697 | 2012 | accident          |
+    |      15698 | 2013 | pregnancy         |
+    |      15699 | 2014 | brain-hamorreaoge |
+    +------------+------+-------------------+
+    10 rows in set (0.06 sec)
+    
+    mysql&gt; create index i1 on bill (p_id, d_id);
+    ERROR 1072 (42000): Key column &apos;d_id&apos; doesn&apos;t exist in table
+    mysql&gt; create index i1 on bill (p_id, doc_id);
+    Query OK, 0 rows affected (0.98 sec)
+    Records: 0  Duplicates: 0  Warnings: 0
+    
+    mysql&gt; select * from i1;
+    ERROR 1146 (42S02): Table &apos;HMS.i1&apos; doesn&apos;t exist
+    mysql&gt; select * from bill;
+    +------------+------+--------+-------------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    | invoice_no | p_id | doc_id | patient_type      | doctor_charges | medicinal_charges | nursing_charges | amount | no_of_days | bill_date  | lab_charges | admission_date |
+    +------------+------+--------+-------------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    |      15686 | 2001 |   8092 | fever             |            200 |               350 |             450 |      0 |          2 | 2022-06-19 |        1000 | 2022-06-19     |
+    |      15687 | 2002 |   8092 | apendix           |            450 |               660 |             450 |      0 |          3 | 2022-04-02 |        2520 | 2022-04-05     |
+    |      15688 | 2003 |   8082 | tooth-ache        |            330 |               550 |             450 |      0 |          0 | 2022-06-19 |           0 | 2022-06-19     |
+    |      15689 | 2004 |   8084 | rashesh           |            660 |               350 |             450 |      0 |          1 | 2022-06-24 |        1000 | 2022-06-25     |
+    |      15690 | 2005 |   8087 | dengu             |            482 |               450 |             450 |      0 |         12 | 2022-05-27 |        2060 | 2022-05-27     |
+    |      15691 | 2006 |   8084 | cataract          |           1200 |              1600 |             450 |      0 |          6 | 2022-04-25 |        1600 | 2022-05-01     |
+    |      15692 | 2007 |   8093 | typhoid           |            450 |               480 |             450 |      0 |         10 | 2022-07-27 |        1900 | 2022-08-07     |
+    |      15693 | 2008 |   8084 | kindney-failure   |            690 |              6000 |             450 |      0 |         15 | 2022-02-13 |        2690 | 2022-02-28     |
+    |      15694 | 2009 |   8081 | heart-blockages   |           1200 |              8000 |             450 |      0 |         12 | 2022-05-05 |        3000 | 2022-05-17     |
+    |      15695 | 2010 |   8082 | leg-fracture      |            300 |              1200 |             450 |      0 |          2 | 2022-11-07 |        1800 | 2022-11-09     |
+    |      15696 | 2011 |   8085 | mouth-cancer      |           1270 |              9000 |             450 |      0 |         21 | 2022-06-16 |        3960 | 2022-07-07     |
+    |      15697 | 2012 |   8082 | accident          |            680 |              1500 |             450 |      0 |         30 | 2022-05-23 |        2300 | 2022-06-23     |
+    |      15698 | 2013 |   8090 | pregnancy         |           1000 |              4500 |             450 |      0 |          1 | 2022-05-28 |        1800 | 2022-05-28     |
+    |      15699 | 2014 |   8081 | brain-hamorreaoge |           2400 |              7800 |             450 |      0 |          4 | 2022-04-08 |        4090 | 2022-04-12     |
+    |      15700 | 2015 |   8086 | fever             |            200 |               250 |             450 |      0 |          0 | 2022-12-22 |         350 | 2022-12-22     |
+    |      15701 | 2020 |   8086 | fever             |            200 |               250 |             450 |      0 |          0 | 2022-09-18 |         350 | 2022-09-18     |
+    +------------+------+--------+-------------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    16 rows in set (0.01 sec)
+    
+    mysql&gt; update bill set nursing_charges=750 where doctor_charges &gt; 800;
+    Query OK, 5 rows affected (0.37 sec)
+    Rows matched: 5  Changed: 5  Warnings: 0
+    
+    mysql&gt; select * from bill;
+    +------------+------+--------+-------------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    | invoice_no | p_id | doc_id | patient_type      | doctor_charges | medicinal_charges | nursing_charges | amount | no_of_days | bill_date  | lab_charges | admission_date |
+    +------------+------+--------+-------------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    |      15686 | 2001 |   8092 | fever             |            200 |               350 |             450 |      0 |          2 | 2022-06-19 |        1000 | 2022-06-19     |
+    |      15687 | 2002 |   8092 | apendix           |            450 |               660 |             450 |      0 |          3 | 2022-04-02 |        2520 | 2022-04-05     |
+    |      15688 | 2003 |   8082 | tooth-ache        |            330 |               550 |             450 |      0 |          0 | 2022-06-19 |           0 | 2022-06-19     |
+    |      15689 | 2004 |   8084 | rashesh           |            660 |               350 |             450 |      0 |          1 | 2022-06-24 |        1000 | 2022-06-25     |
+    |      15690 | 2005 |   8087 | dengu             |            482 |               450 |             450 |      0 |         12 | 2022-05-27 |        2060 | 2022-05-27     |
+    |      15691 | 2006 |   8084 | cataract          |           1200 |              1600 |             750 |      0 |          6 | 2022-04-25 |        1600 | 2022-05-01     |
+    |      15692 | 2007 |   8093 | typhoid           |            450 |               480 |             450 |      0 |         10 | 2022-07-27 |        1900 | 2022-08-07     |
+    |      15693 | 2008 |   8084 | kindney-failure   |            690 |              6000 |             450 |      0 |         15 | 2022-02-13 |        2690 | 2022-02-28     |
+    |      15694 | 2009 |   8081 | heart-blockages   |           1200 |              8000 |             750 |      0 |         12 | 2022-05-05 |        3000 | 2022-05-17     |
+    |      15695 | 2010 |   8082 | leg-fracture      |            300 |              1200 |             450 |      0 |          2 | 2022-11-07 |        1800 | 2022-11-09     |
+    |      15696 | 2011 |   8085 | mouth-cancer      |           1270 |              9000 |             750 |      0 |         21 | 2022-06-16 |        3960 | 2022-07-07     |
+    |      15697 | 2012 |   8082 | accident          |            680 |              1500 |             450 |      0 |         30 | 2022-05-23 |        2300 | 2022-06-23     |
+    |      15698 | 2013 |   8090 | pregnancy         |           1000 |              4500 |             750 |      0 |          1 | 2022-05-28 |        1800 | 2022-05-28     |
+    |      15699 | 2014 |   8081 | brain-hamorreaoge |           2400 |              7800 |             750 |      0 |          4 | 2022-04-08 |        4090 | 2022-04-12     |
+    |      15700 | 2015 |   8086 | fever             |            200 |               250 |             450 |      0 |          0 | 2022-12-22 |         350 | 2022-12-22     |
+    |      15701 | 2020 |   8086 | fever             |            200 |               250 |             450 |      0 |          0 | 2022-09-18 |         350 | 2022-09-18     |
+    +------------+------+--------+-------------------+----------------+-------------------+-----------------+--------+------------+------------+-------------+----------------+
+    16 rows in set (0.00 sec)
+    
+    </pre>
+
+
+
+
+<!-- 
+insert into patient values
+(2001,'Trilby Dickey'     ,19,73,'M','Shirdi'   ,808046001,'fever',8092,'trilb.dickey@gmail.com',      'none','B+'),
+(2002,'Lilly Dickey'      ,20,66,'F','Vardha'   ,820838760,'apendix',8082,'li_dickey@gmail.com',         'diary-products','AB-'),
+(2020,'Walter Lisle'      ,20,49,'M','Beed'     ,808017967,'fever',8092,'wa-li@gmail.com',             'dust','B+'),
+(2003,'Roisin Herndon'    ,20,65,'M','solapur'  ,992163596,'tooth-ache',8084,'roisi.hernd@gmail.com',    'pollen','B-'),
+(2004,'Ausiana Lisle'     ,21,74,'M','Panvel'   ,810498704,'rashesh',8087,'ausian-li@gmail.com',         'none','B+'),
+(2005,'Zorro Bethke'      ,20,69,'M','Baramati' ,983429556,'dengu',8085,'harshdeepd70@gmail.com',      'peanuts','O+'),
+(2006,'Yashovarman Jain'  ,20,40,'M','Malkapur' ,976500571,'cataract',8084,'zorr.beth@gmail.com',         ' none','A+'),
+(2007,'Gaurav Fitzgibbon' ,15,65,'M','Yeola'    ,937030252,'typhoid',8093,'yasho_fitzgibbo@gmail.com',   'none','AB+'),
+(2008,'Trilby Tiller'     ,20,73,'F','Nagar'    ,963732016,'kindney-failure',8084,'ga_tille@gmail.com',  'pollen','O+'),
+(2009,'Ahuva Mikel'       ,20,40,'M','Pune'     ,916848210,'heart-blockages',8081,'ah.pai@gmail.com',    'none','AB+'),
+(2010,'Mihir Paiva'       ,20,73,'F','Newasa'   ,895633832,'leg-fracture',8082,'mih-lever@gmail.com',    'none','A+'),
+(2011,'Mel Levering'      ,20,70,'M','pune'     ,738562290,'mouth-cancer',8085,'me.seifer@gmail.com',    'none','O+'),
+(2012,'Aniket Seifert'    ,20,60,'M','Shirdi'   ,734562290,'accident',8082,'aniketwakchaure345@gmail.com','milk','O+'),
+(2013,'shrutik hon'       ,21,66,'F','Kolhar'   ,947843290,'pregnancy',8090,'shrutikhon787@gmail.com',     'dust','B+'),
+(2014,'Kartik Chothe'     ,20,70,'M','Kopergaon',838572276,'brain-hamorreaoge',8081,'kartikchothe648@gmail.com',   'none','O-'),
+(2015,'Yash deshpande'     ,8,30,'M','nagpur',838657276,'fever',8086,'amandeshpande@gmail.com',   'none','O+');
+
+
+
+
+INSERT INTO `emails` ( `gender`, `first_name`, `last_name`, `email` ) VALUES
+('M','Trilby','Dickey','trilb.dickey@consolidated-farm-research.net'),
+('F','Lilly','Dickey','li_dickey@consolidated-farm-research.net'),
+('M','Walter','Lisle','wa-li@diaperstack.com'),
+('F','Roisin','Herndon','roisi.hernd@careful-organics.org'),
+('F','Ausiana','Lisle','ausian-li@arketmay.com'),
+('M','Zorro','Bethke','zorr.beth@consolidated-farm-research.net'),
+('M','Yashovarman','Fitzgibbon','yasho_fitzgibbo@careful-organics.org'),
+('M','Gaurav','Tiller','ga_tille@autozone-inc.info'),
+('M','Trilby','Mikel','tril_mikel@arvinmeritor.info'),
+('F','Ahuva','Paiva','ah.pai@egl-inc.info'),
+('M','Mihir','Levering','mih-lever@consolidated-farm-research.net'),
+('M','Mel','Seifert','me.seifer@careful-organics.org'),
+('F','Maxine','Sandman','maxin_sandman@arketmay.com'),
+('M','Keller','Gajewski','keller_gajewsk@progressenergyinc.info'),
+('M','Dalziel','Ridgley','dalzie-ridgley@progressenergyinc.info'); -->
+
+
+<!-- INSERT INTO services VALUES
+(2001, 'pathalogy',       '2022-06-19',1000 ,'al1',NULL),
+(2002, 'pathalogy',       '2022-04-02',1000 ,'al1',NULL),
+(2002, 'sonograph',       '2022-04-05',1520 ,'bl1',NULL),
+(2004, 'pathalogy',       '2022-06-24',1000 ,'al1',NULL),
+(2005, 'pathalogy',       '2022-05-15',860  ,'al1',NULL),
+(2005, 'drugs-scr', '2022-05-27',1200 ,'cl1',NULL),
+(2006, 'anatomy',         '2022-04-25',1600 ,'al2',NULL),
+(2007, 'pathalogy',       '2022-07-17',1350 ,'al1',NULL),
+(2007, 'drugs-scr', '2022-07-27',550  ,'cl1',NULL),
+(2008, 'ambulance',       '2022-02-13',800  ,NULL,5),
+(2008, 'anatomy',         '2022-02-28',1890 ,'al2',NULL),
+(2009, 'ambulance',       '2022-05-05',1100 ,NULL,5),
+(2009, 'city-scan',       '2022-05-05',1900 ,'bl2',NULL),
+(2009, 'anatomy',         '2022-05-09',1300 ,'al2',NULL),
+(2010, 'ambulance',        '2022-11-07',600  ,NULL,5),
+(2010, 'anatomy',         '2022-11-09',1200 ,'al2',NULL),
+(2011, 'pathalogy',        '2022-06-14',1560 ,'al1',NULL),
+(2011, 'drugs-scr', '2022-06-16',2400 ,'cl1',NULL),
+(2012, 'ambulance',       '2022-05-23',750  ,NULL,1),
+(2012, 'anatomy',         '2022-06-23',1550 ,'al2',NULL),
+(2013, 'ambulance',       '2022-05-28',450  ,NULL,5),
+(2013, 'sonograph',       '2022-05-28',1350 ,'bl1',NULL),
+(2014, 'ambulance',       '2022-04-04',1540 ,NULL,2),
+(2014, 'anatomy',         '2022-04-08',2550 ,'al2',NULL),
+(2015, 'pathalogy',        '2022-12-22',350  ,'al1',NULL),
+(2020, 'pathalogy',       '2022-09-18',350  ,'al1',NULL); -->
+<!-- 
+mysql> desc bill;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| invoice_no        | int         | NO   | PRI | NULL    |       |
+| p_id              | int         | YES  | MUL | NULL    |       |
+| doc_id            | int         | YES  | MUL | NULL    |       |
+| patient_type      | varchar(30) | YES  |     | NULL    |       |
+| doctor_charges    | int         | YES  |     | NULL    |       |
+| medicinal_charges | int         | YES  |     | NULL    |       |
+| nursing_charges   | int         | YES  |     | NULL    |       |
+| amount            | int         | NO   |     | NULL    |       |
+| no_of_days        | int         | YES  |     | NULL    |       |
+| bill_date         | date        | YES  |     | NULL    |       |
+| lab_charges       | int         | YES  |     | NULL    |       |
+| admission_date    | date        | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+
+INSERT INTO bill values
+(15686,2001,8092,'fever',200,350,450,0,2,'2022-06-19',1000,'2022-06-19'),
+(15687,2002,8092,'apendix'          ,450,660,450,   0,3,'2022-04-02',2520,'2022-04-05'),
+(15688,2003,8082,'tooth-ache'       ,330,550,450,   0,0,'2022-06-19',0,'2022-06-19'),
+(15689,2004,8084,'rashesh'          ,660,350,450,   0,1,'2022-06-24',1000,'2022-06-25'),
+(15690,2005,8087,'dengu'            ,482,450,450,   0,12,'2022-05-27',2060,'2022-05-27'),
+(15691,2006,8084,'cataract'         ,1200,1600,450, 0,6,'2022-04-25',1600,'2022-05-01'),
+(15692,2007,8093,'typhoid'          ,450,480,450,   0,10,'2022-07-27',1900,'2022-08-07'),
+(15693,2008,8084,'kindney-failure'  ,690,6000,450,  0,15,'2022-02-13',2690,'2022-02-28'),
+(15694,2009,8081,'heart-blockages'  ,1200,8000,450, 0,12,'2022-05-05',3000,'2022-05-17'),
+(15695,2010,8082,'leg-fracture'     ,300,1200,450,  0,2,'2022-11-07',1800,'2022-11-09'),
+(15696,2011,8085,'mouth-cancer'     ,1270,9000,450, 0,21,'2022-06-16',3960,'2022-07-07'),
+(15697,2012,8082,'accident'         ,680,1500,450,  0,30,'2022-05-23',2300,'2022-06-23'),
+(15698,2013,8090,'pregnancy'        ,1000,4500,450, 0,1,'2022-05-28',1800,'2022-05-28'),
+(15699,2014,8081,'brain-hamorreaoge',2400,7800,450, 0,4,'2022-04-08',4090,'2022-04-12'),
+(15700,2015,8086,'fever'            ,200,250,450,   0,0,'2022-12-22',350,'2022-12-22'),
+(15701,2020,8086,'fever'            ,200,250,450,   0,0,'2022-09-18',350,'2022-09-18');
+
++------+-------------------+
+| p_id | disease           |
++------+-------------------+
+| 2001 | fever             |
+| 2002 | apendix           |
+| 2003 | tooth-ache        |
+| 2004 | rashesh           |
+| 2005 | dengu             |
+| 2006 | cataract          |
+| 2007 | typhoid           |
+| 2008 | kindney-failure   |
+| 2009 | heart-blockages   |
+| 2010 | leg-fracture      |
+| 2011 | mouth-cancer      |
+| 2012 | accident          |
+| 2013 | pregnancy         |
+| 2014 | brain-hamorreaoge |
+| 2015 | fever             |
+| 2020 | fever             |
++------+-------------------+ -->
