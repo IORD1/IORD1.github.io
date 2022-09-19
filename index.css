@@ -25,10 +25,12 @@ body{
 #App {
   /* background-color: #FA6864; */
   text-align: center;
-  height: 20vh;
+  height: auto;
   width: 100vw;
   transition: all 1s ease-in-out;
   overflow: hidden;
+  background-image: linear-gradient(black, #866A3A);
+  /* background-color: #866A3A; */
 }
 
 
@@ -121,6 +123,8 @@ body{
   justify-content: center;
   align-items: center;
   padding-top: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 
 }
 .quotonquot{

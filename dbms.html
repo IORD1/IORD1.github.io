@@ -579,3 +579,37 @@ INSERT INTO bill values
 | 2015 | fever             |
 | 2020 | fever             |
 +------+-------------------+ -->
+
+
+
+
+mysql> insert into doctor values
+    (8082, 'Rakesh','Patil', 'Surgeon', 'MS', '15 years', '2005-03-22'),
+    (8083, 'Ankush','Shinde', 'Urologist', 'MS', '18 years', '2002-08-12'),
+    (8084, 'Ashish','Gandhi', 'Dentist', 'BDS', '25 years', '1995-09-11'),
+    (8085, 'Surabhi','Nair', 'Ophthamologist', 'MBBS', '19 years', '2001-06-22'),
+    (8086, 'Gagan','Gautam', 'Pediatrisian', 'MD', '13 years', '2007-03-01'),
+    (8087, 'Abhishek','Sinha', 'Dermatologist', 'MS', '08 years', '2012-04-06'),
+    (8088, 'Aditya','Gupta', 'Opthamologist', 'MS', '16 years', '2004-11-25'),
+    (8089, 'Bipin','Vaidya', 'Radiologist', 'MS', '06 years', '2014-07-31'),
+    (8090, 'Gaurav','Khanna', 'Gynaecologist', 'MS', '17 years', '2003-07-07'),
+    (8091, 'Ankur','Rathod', 'Nephrologist', 'MS', '09 years', '2011-06-17'),
+    (8092, 'Dhanashri','Jain', 'Patheologist', 'MD', '13 years', '2007-12-27'),
+    (8093, 'Indraprakash','Mishra', 'Microbiologist', 'MD', '04 years', '2016-05-07'),
+    (8094, 'Mahesh','Kundra', 'Hematologist', 'MS', '15 years', '2005-07-21'),
+    (8095, 'Alakh','Pandey', 'Oncologist', 'MS', '18 years', '2002-06-19');
+
+
+update doctor set experience = 25 where doc_id = 8084;
+update doctor set experience = 15 where doc_id = 8083;
+update doctor set experience = 19 where doc_id = 8085;
+update doctor set experience = 13 where doc_id = 8086;
+update doctor set experience = 8 where doc_id = 8087;
+update doctor set experience = 16 where doc_id = 8088;
+update doctor set experience = 6 where doc_id = 8089;
+update doctor set experience = 17 where doc_id = 8090;
+update doctor set experience = 9 where doc_id = 8091;
+update doctor set experience = 13 where doc_id = 8092;
+update doctor set experience = 4 where doc_id = 8093;
+update doctor set experience = 15 where doc_id = 8094;
+update doctor set experience = 18 where doc_id = 8095;
